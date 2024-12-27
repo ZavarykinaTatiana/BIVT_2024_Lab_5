@@ -304,12 +304,13 @@ public class Program
 
         // end
     }
-    public void Task_2_12(int[,] A, int[,] B) // dotnet test --filter Tests.ProgramTests.Task_2_10Test
+    public void Task_2_12(int[,] A, int[,] B) // dotnet test --filter Tests.ProgramTests.Task_2_12Test
     {
         // code here
-        int maxColA = FindMaxColumnIndex(A), maxColB = FindMaxColumnIndex(B);
+        int maxColA = FindMaxColumnIndex(A);
+        int maxColB = FindMaxColumnIndex(B);
 
-        for (int i=0; i<A.GetLength(0); i++) {
+        for (int i = 0; i < A.GetLength(0); i++) {
             int temp = A[i, maxColA];
             A[i, maxColA] = B[i, maxColB];
             B[i, maxColB] = temp;
@@ -319,13 +320,16 @@ public class Program
 
     public int FindMaxColumnIndex(int[,] matrix) {
         int maxCol = 0;
+        int maxVal = matrix[0, 0];
 
-        for (int i=0; i < matrix.GetLength(0); i++) {
-            for (int j=0; j < matrix.GetLength(1); j++) {
-                if (matrix[i, j] > matrix[i, maxCol]) maxCol = j;
+        for (int j = 0; j < matrix.GetLength(1); j++) {
+            for (int i = 0; i < matrix.GetLength(0); i++) {
+                if (matrix[i, j] > maxVal) {
+                    maxVal = matrix[i, j];
+                    maxCol = j;
+                }
             }
         }
-
         return maxCol;
     }
 
